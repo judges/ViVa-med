@@ -1,0 +1,13 @@
+<% title "Welcomes" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+  <% for welcome in @welcomes %>
+    <tr>
+      <td><%=h welcome.name %></td>
+    </tr>
+  <% end %>
+</table>
+
