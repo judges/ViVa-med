@@ -18,6 +18,11 @@ a {
   overflow: hidden;
 }
 
+#user_nav {
+  float: right;
+  font-size: 12px;
+}
+
 #container {
   width: 75%;
   margin: 0 auto;

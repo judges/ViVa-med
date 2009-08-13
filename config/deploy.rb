@@ -29,4 +29,7 @@ set :repository,  "set your repository location here"
 # set :scm, :subversion
 # see a full list by running "gem contents capistrano | grep 'scm/'"
 
-role :web, "your web-server here"
+role :web, "rails.no-names.net"
+
+set :stages, %w(production stage)
+require 'capistrano/ext/multistage'
