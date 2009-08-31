@@ -1,0 +1,32 @@
+<h1>Editing doctor</h1>
+
+<% form_for(@doctor) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :firstname %><br />
+    <%= f.text_field :firstname %>
+  </p>
+  <p>
+    <%= f.label :lastname %><br />
+    <%= f.text_field :lastname %>
+  </p>
+  <p>
+    <%= f.label :initials %><br />
+    <%= f.text_field :initials %>
+  </p>
+  <p>
+    <%= f.label :proffesion_id %><br />
+    <%= f.text_field :proffesion_id %>
+  </p>
+  <p>
+    <%= f.label :portfollio_id %><br />
+    <%= f.text_field :portfollio_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @doctor %> |
+<%= link_to 'Back', doctors_path %>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActionController::FilterParameterLogging::ClassMethods</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActionController::FilterParameterLogging::ClassMethods</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/vendor/rails/actionpack/lib/action_controller/metal/filter_parameter_logging_rb.html">
+                vendor/rails/actionpack/lib/action_controller/metal/filter_parameter_logging.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000619">filter_parameter_logging</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000619" class="method-detail">
+        <a name="M000619"></a>
+
+        <div class="method-heading">
+          <a href="#M000619" class="method-signature">
+          <span class="method-name">filter_parameter_logging</span><span class="method-args">(*filter_words) {|key, value| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Replace sensitive parameter data from the request log. Filters parameters
+that have any of the arguments as a substring. Looks in all subhashes of
+the param hash for keys to filter. If a block is given, each key and value
+of the parameter hash and all subhashes is passed to it, the value or key
+can be replaced using String#replace or similar method.
+</p>
+<p>
+Examples:
+</p>
+<pre>
+  filter_parameter_logging
+  =&gt; Does nothing, just slows the logging process down
+
+  filter_parameter_logging :password
+  =&gt; replaces the value to all keys matching /password/i with &quot;[FILTERED]&quot;
+
+  filter_parameter_logging :foo, &quot;bar&quot;
+  =&gt; replaces the value to all keys matching /foo|bar/i with &quot;[FILTERED]&quot;
+
+  filter_parameter_logging { |k,v| v.reverse! if k =~ /secret/i }
+  =&gt; reverses the value to all keys matching /secret/i
+
+  filter_parameter_logging(:foo, &quot;bar&quot;) { |k,v| v.reverse! if k =~ /secret/i }
+  =&gt; reverses the value to all keys matching /secret/i, and
+     replaces the value to all keys matching /foo|bar/i with &quot;[FILTERED]&quot;
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000619-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000619-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/filter_parameter_logging.rb, line 35</span>
+35:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_parameter_logging</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">filter_words</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+36:         <span class="ruby-identifier">parameter_filter</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">filter_words</span>.<span class="ruby-identifier">collect</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'|'</span>), <span class="ruby-keyword kw">true</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">filter_words</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+37: 
+38:         <span class="ruby-identifier">define_method</span>(<span class="ruby-identifier">:filter_parameters</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">unfiltered_parameters</span><span class="ruby-operator">|</span>
+39:           <span class="ruby-identifier">filtered_parameters</span> = {}
+40: 
+41:           <span class="ruby-identifier">unfiltered_parameters</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+42:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">parameter_filter</span>
+43:               <span class="ruby-identifier">filtered_parameters</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-value str">'[FILTERED]'</span>
+44:             <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+45:               <span class="ruby-identifier">filtered_parameters</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">filter_parameters</span>(<span class="ruby-identifier">value</span>)
+46:             <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+47:               <span class="ruby-identifier">filtered_parameters</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+48:                 <span class="ruby-identifier">filter_parameters</span>(<span class="ruby-identifier">item</span>)
+49:               <span class="ruby-keyword kw">end</span>
+50:             <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">block_given?</span>
+51:               <span class="ruby-identifier">key</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">dup</span>
+52:               <span class="ruby-identifier">value</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">dup</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>
+53:               <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>
+54:               <span class="ruby-identifier">filtered_parameters</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">value</span>
+55:             <span class="ruby-keyword kw">else</span>
+56:               <span class="ruby-identifier">filtered_parameters</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">value</span>
+57:             <span class="ruby-keyword kw">end</span>
+58:           <span class="ruby-keyword kw">end</span>
+59: 
+60:           <span class="ruby-identifier">filtered_parameters</span>
+61:         <span class="ruby-keyword kw">end</span>
+62:         <span class="ruby-identifier">protected</span> <span class="ruby-identifier">:filter_parameters</span>
+63:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

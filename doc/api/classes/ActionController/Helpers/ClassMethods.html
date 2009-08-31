@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActionController::Helpers::ClassMethods</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActionController::Helpers::ClassMethods</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/vendor/rails/actionpack/lib/action_controller/metal/helpers_rb.html">
+                vendor/rails/actionpack/lib/action_controller/metal/helpers.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000616">helper</a>&nbsp;&nbsp;
+      <a href="#M000617">helper_attr</a>&nbsp;&nbsp;
+      <a href="#M000618">helpers</a>&nbsp;&nbsp;
+      <a href="#M000615">inherited</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000616" class="method-detail">
+        <a name="M000616"></a>
+
+        <div class="method-heading">
+          <a href="#M000616" class="method-signature">
+          <span class="method-name">helper</span><span class="method-args">(*args, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The <tt><a href="ClassMethods.html#M000616">helper</a></tt> class method
+can take a series of <a href="ClassMethods.html#M000616">helper</a> module
+names, a block, or both.
+</p>
+<h4>Parameters</h4>
+<p>
+*args&lt;Array[<a href="../../Module.html">Module</a>, Symbol, String,
+:all]&gt;
+</p>
+<table>
+<tr><td valign="top">block&lt;Block&gt;:</td><td>A block defining <a href="ClassMethods.html#M000616">helper</a> methods
+
+</td></tr>
+</table>
+<h4>Examples</h4>
+<p>
+When the argument is a string or symbol, the method will provide the
+&quot;_helper&quot; suffix, require the file and include the module in the
+template class. The second form illustrates how to include custom <a
+href="ClassMethods.html#M000618">helpers</a> when working with namespaced
+controllers, or other cases where the file containing the <a
+href="ClassMethods.html#M000616">helper</a> definition is not in one of <a
+href="../../Rails.html">Rails</a>&#8217; standard load paths:
+</p>
+<pre>
+  helper :foo             # =&gt; requires 'foo_helper' and includes FooHelper
+  helper 'resources/foo'  # =&gt; requires 'resources/foo_helper' and includes Resources::FooHelper
+</pre>
+<p>
+When the argument is a module it will be included directly in the template
+class.
+</p>
+<pre>
+  helper FooHelper # =&gt; includes FooHelper
+</pre>
+<p>
+When the argument is the symbol <tt>:all</tt>, the controller will include
+all <a href="ClassMethods.html#M000618">helpers</a> beneath
+<tt>ActionController::Base.helpers_dir</tt> (defaults to
+<tt>app/helpers/**/*.rb</tt> under RAILS_ROOT).
+</p>
+<pre>
+  helper :all
+</pre>
+<p>
+Additionally, the <tt><a href="ClassMethods.html#M000616">helper</a></tt>
+class method can receive and evaluate a block, making the methods defined
+available to the template.
+</p>
+<pre>
+  # One line
+  helper { def hello() &quot;Hello, world!&quot; end }
+  # Multi-line
+  helper do
+    def foo(bar)
+      &quot;#{bar} is the very best&quot;
+    end
+  end
+</pre>
+<p>
+Finally, all the above styles can be mixed together, and the <tt><a
+href="ClassMethods.html#M000616">helper</a></tt> method can be invoked with
+a mix of <tt>symbols</tt>, <tt>strings</tt>, <tt>modules</tt> and blocks.
+</p>
+<pre>
+  helper(:three, BlindHelper) { def mice() 'mice' end }
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000616-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000616-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/helpers.rb, line 103</span>
+103:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">helper</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+104:         <span class="ruby-keyword kw">super</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">_modules_for_helpers</span>(<span class="ruby-identifier">args</span>), <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+105:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000617" class="method-detail">
+        <a name="M000617"></a>
+
+        <div class="method-heading">
+          <a href="#M000617" class="method-signature">
+          <span class="method-name">helper_attr</span><span class="method-args">(*attrs)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Declares <a href="ClassMethods.html#M000616">helper</a> accessors for
+controller attributes. For example, the following adds new <tt>name</tt>
+and <tt>name=</tt> instance methods to a controller and makes them
+available to the view:
+</p>
+<pre>
+  helper_attr :name
+  attr_accessor :name
+</pre>
+<h4>Parameters</h4>
+<table>
+<tr><td valign="top">*attrs&lt;Array[String, Symbol]&gt;:</td><td>Names of attributes to be converted
+
+</td></tr>
+</table>
+<pre>
+  into helpers.
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000617-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000617-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/helpers.rb, line 116</span>
+116:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">helper_attr</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">attrs</span>)
+117:         <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">attr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">helper_method</span>(<span class="ruby-identifier">attr</span>, <span class="ruby-node">&quot;#{attr}=&quot;</span>) }
+118:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000618" class="method-detail">
+        <a name="M000618"></a>
+
+        <div class="method-heading">
+          <a href="#M000618" class="method-signature">
+          <span class="method-name">helpers</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Provides a proxy to access <a href="ClassMethods.html#M000618">helpers</a>
+methods from outside the view.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000618-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000618-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/helpers.rb, line 121</span>
+121:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">helpers</span>
+122:         <span class="ruby-ivar">@helper_proxy</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-identifier">_helpers</span>)
+123:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000615" class="method-detail">
+        <a name="M000615"></a>
+
+        <div class="method-heading">
+          <a href="#M000615" class="method-signature">
+          <span class="method-name">inherited</span><span class="method-args">(klass)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000615-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000615-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/helpers.rb, line 62</span>
+62:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inherited</span>(<span class="ruby-identifier">klass</span>)
+63:         <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">class_eval</span> { <span class="ruby-identifier">default_helper_module!</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">blank?</span> }
+64:         <span class="ruby-keyword kw">super</span>
+65:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

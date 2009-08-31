@@ -1,0 +1,28 @@
+<h1>Editing portfollio</h1>
+
+<% form_for(@portfollio) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :cabinet_id %><br />
+    <%= f.text_field :cabinet_id %>
+  </p>
+  <p>
+    <%= f.label :worktime_id %><br />
+    <%= f.datetime_select :worktime_id %>
+  </p>
+  <p>
+    <%= f.label :salary %><br />
+    <%= f.text_field :salary %>
+  </p>
+  <p>
+    <%= f.label :bonus %><br />
+    <%= f.text_field :bonus %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @portfollio %> |
+<%= link_to 'Back', portfollios_path %>

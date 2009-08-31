@@ -1,0 +1,688 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Active Support Overview</title>
+
+<link rel="stylesheet" type="text/css" href="files/stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="files/stylesheets/syntax.css" />
+<link rel="stylesheet" type="text/css" href="files/stylesheets/print.css" media="print" />
+
+<script type="text/javascript" src="files/javascripts/guides.js"></script>
+<script type="text/javascript" src="files/javascripts/code_highlighter.js"></script>
+<script type="text/javascript" src="files/javascripts/highlighters.js"></script>
+
+</head>
+<body class="guide">
+  <div id="topNav">
+    <div class="wrapper">
+      <strong>More at <a href="http://rubyonrails.org/">rubyonrails.org:</a> </strong>
+      <a href="http://rubyonrails.org/">Overview</a> |
+      <a href="http://rubyonrails.org/download">Download</a> |
+      <a href="http://rubyonrails.org/deploy">Deploy</a> |
+      <a href="http://rails.lighthouseapp.com/projects/8994-ruby-on-rails/overview">Code</a> |
+      <a href="http://rubyonrails.org/screencasts">Screencasts</a> |
+      <a href="http://rubyonrails.org/documentation">Documentation</a> |
+      <a href="http://rubyonrails.org/ecosystem">Ecosystem</a> |
+      <a href="http://rubyonrails.org/community">Community</a> |
+      <a href="http://weblog.rubyonrails.org/">Blog</a>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1><a href="index.html" title="Return to home page">Guides.rubyonrails.org</a></h1>
+      <p class="hide"><a href="#mainCol">Skip navigation</a>.</p>
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li class="index"><a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu">Guides Index</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+            <dl class="L">
+              <dt>Start Here</dt>
+              <dd><a href="getting_started.html">Getting Started with Rails</a></dd>
+              <dt>Models</dt>
+              <dd><a href="migrations.html">Rails Database Migrations</a></dd>
+              <dd><a href="activerecord_validations_callbacks.html">Active Record Validations and Callbacks</a></dd>
+              <dd><a href="association_basics.html">Active Record Associations</a></dd>
+              <dd><a href="active_record_querying.html">Active Record Query Interface</a></dd>
+              <dt>Views</dt>
+              <dd><a href="layouts_and_rendering.html">Layouts and Rendering in Rails</a></dd>
+              <dd><a href="form_helpers.html">Action View Form Helpers</a></dd>
+              <dt>Controllers</dt>
+              <dd><a href="action_controller_overview.html">Action Controller Overview</a></dd>
+              <dd><a href="routing.html">Rails Routing from the Outside In</a></dd>
+            </dl>
+            <dl class="R">
+              <dt>Digging Deeper</dt>
+              <dd><a href="i18n.html">Rails Internationalization API</a></dd>
+              <dd><a href="action_mailer_basics.html">Action Mailer Basics</a></dd>
+              <dd><a href="testing.html">Testing Rails Applications</a></dd>
+              <dd><a href="security.html">Securing Rails Applications</a></dd>
+              <dd><a href="debugging_rails_applications.html">Debugging Rails Applications</a></dd>
+              <dd><a href="performance_testing.html">Performance Testing Rails Applications</a></dd>
+              <dd><a href="plugins.html">The Basics of Creating Rails Plugins</a></dd>
+              <dd><a href="configuring.html">Configuring Rails Applications</a></dd>
+              <dd><a href="rails_on_rack.html">Rails on Rack</a></dd>
+              <dd><a href="command_line.html">Rails Command Line Tools and Rake Tasks</a></dd>
+              <dd><a href="caching_with_rails.html">Caching with Rails</a></dd>
+              <dd><a href="contributing_to_rails.html">Contributing to Rails</a></dd>
+            </dl>
+          </div>
+        </li>
+        <li><a href="contribute.html">Contribute</a></li>
+        <li><a href="credits.html">Credits</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2>Active Support Overview</h2>
+<p>Active Support is the Rails component responsible for providing Ruby language extensions, utilities, and other transversal stuff. It offers a richer bottom-line at the language level, targeted both at the development of Rails applications, and at the development of Rails itself.</p>
+<p>By referring to this guide you will learn:</p>
+<ul>
+	<li>The extensions to the Ruby core modules and classes provided by Rails.</li>
+	<li>The rest of fundamental libraries available in Rails.</li>
+</ul>
+
+            <div id="subCol">
+        <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+        <ol class="chapters">
+<li><a href="#extensions-to-all-objects">Extensions to All Objects</a><ul><li><a href="#blank-and-present"><tt>blank?</tt> and <tt>present?</tt></a></li><li><a href="#duplicable"><tt>duplicable?</tt></a></li><li><a href="#returning"><tt>returning</tt></a></li><li><a href="#tap"><tt>tap</tt></a></li><li><a href="#try"><tt>try</tt></a></li><li><a href="#metaclass"><tt>metaclass</tt></a></li><li><a href="#class-evalargs-block"><tt>class_eval(*args, &block)</tt></a></li><li><a href="#acts-likeduck"><tt>acts_like?(duck)</tt></a></li><li><a href="#to-param"><tt>to_param</tt></a></li><li><a href="#to-query"><tt>to_query</tt></a></li><li><a href="#with-options"><tt>with_options</tt></a></li><li><a href="#instance-variables">Instance Variables</a></li><li><a href="#silencing-warnings-streams-and-exceptions">Silencing Warnings, Streams, and Exceptions</a></li></ul></li><li><a href="#extensions-to-module">Extensions to <tt>Module</tt></a><ul></ul></li><li><a href="#extensions-to-class">Extensions to <tt>Class</tt></a><ul><li><a href="#class-attribute-accessors">Class Attribute Accessors</a></li><li><a href="#class-inheritable-attributes">Class Inheritable Attributes</a></li><li><a href="#subclasses">Subclasses</a></li><li><a href="#class-removal">Class Removal</a></li></ul></li><li><a href="#extensions-to-nilclass">Extensions to <tt>NilClass</tt></a><ul></ul></li><li><a href="#extensions-to-trueclass">Extensions to <tt>TrueClass</tt></a><ul></ul></li><li><a href="#extensions-to-falseclass">Extensions to <tt>FalseClass</tt></a><ul></ul></li><li><a href="#extensions-to-symbol">Extensions to <tt>Symbol</tt></a><ul></ul></li><li><a href="#extensions-to-string">Extensions to <tt>String</tt></a><ul></ul></li><li><a href="#extensions-to-numeric">Extensions to <tt>Numeric</tt></a><ul></ul></li><li><a href="#extensions-to-integer">Extensions to <tt>Integer</tt></a><ul></ul></li><li><a href="#extensions-to-float">Extensions to <tt>Float</tt></a><ul></ul></li><li><a href="#extensions-to-bigdecimal">Extensions to <tt>BigDecimal</tt></a><ul></ul></li><li><a href="#extensions-to-enumerable">Extensions to <tt>Enumerable</tt></a><ul></ul></li><li><a href="#extensions-to-array">Extensions to <tt>Array</tt></a><ul><li><a href="#accessing">Accessing</a></li><li><a href="#grouping">Grouping</a></li></ul></li><li><a href="#extensions-to-hash">Extensions to <tt>Hash</tt></a><ul></ul></li><li><a href="#extensions-to-range">Extensions to <tt>Range</tt></a><ul></ul></li><li><a href="#extensions-to-proc">Extensions to <tt>Proc</tt></a><ul></ul></li><li><a href="#extensions-to-date">Extensions to <tt>Date</tt></a><ul></ul></li><li><a href="#extensions-to-datetime">Extensions to <tt>DateTime</tt></a><ul></ul></li><li><a href="#extensions-to-time">Extensions to <tt>Time</tt></a><ul></ul></li><li><a href="#extensions-to-process">Extensions to <tt>Process</tt></a><ul></ul></li><li><a href="#extensions-to-pathname">Extensions to <tt>Pathname</tt></a><ul></ul></li><li><a href="#extensions-to-file">Extensions to <tt>File</tt></a><ul></ul></li><li><a href="#extensions-to-exception">Extensions to <tt>Exception</tt></a><ul></ul></li><li><a href="#extensions-to-nameerror">Extensions to <tt>NameError</tt></a><ul></ul></li><li><a href="#extensions-to-loaderror">Extensions to <tt>LoadError</tt></a><ul></ul></li><li><a href="#extensions-to-cgi">Extensions to <tt>CGI</tt></a><ul></ul></li><li><a href="#extensions-to-benchmark">Extensions to <tt>Benchmark</tt></a><ul></ul></li><li><a href="#changelog">Changelog</a><ul></ul></li></ol></div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <h3 id="extensions-to-all-objects">1 Extensions to All Objects</h3>
+<h4 id="blank-and-present">1.1 <tt>blank?</tt> and <tt>present?</tt></h4>
+<p>The following values are considered to be blank in a Rails application:</p>
+<ul>
+	<li><tt>nil</tt> and <tt>false</tt>,</li>
+</ul>
+<ul>
+	<li>strings composed only of whitespace, i.e. matching <tt>/\A\s*\z/</tt>,</li>
+</ul>
+<ul>
+	<li>empty arrays and hashes, and</li>
+</ul>
+<ul>
+	<li>any other object that responds to <tt>empty?</tt> and it is empty.</li>
+</ul>
+<div class='warning'><p>Note that numbers are not mentioned, in particular 0 and 0.0 are <strong>not</strong> blank.</p></div>
+<p>For example, this method from <tt>ActionDispatch::Response</tt> uses <tt>blank?</tt> to easily be robust to <tt>nil</tt> and whitespace strings in one shot:</p>
+<div class="code_container"><code class="ruby">
+def charset
+  charset = String(headers[&quot;Content-Type&quot;] || headers[&quot;type&quot;]).split(&quot;;&quot;)[1]
+  charset.blank? ? nil : charset.strip.split(&quot;=&quot;)[1]
+end
+</code></div>
+<p>That&#8217;s a typical use case for <tt>blank?</tt>.</p>
+<p>Here, the method Rails runs to instantiate observers upon initialization has nothing to do if there are none:</p>
+<div class="code_container"><code class="ruby">
+def instantiate_observers
+  return if @observers.blank?
+  # ...
+end
+</code></div>
+<p>The method <tt>present?</tt> is equivalent to <tt>!blank?</tt>:</p>
+<div class="code_container"><code class="ruby">
+assert @response.body.present? # same as !@response.body.blank?
+</code></div>
+<h4 id="duplicable">1.2 <tt>duplicable?</tt></h4>
+<p>A few fundamental objects in Ruby are singletons. For example, in the whole live of a program the integer 1 refers always to the same instance:</p>
+<div class="code_container"><code class="ruby">
+1.object_id                 # =&gt; 3
+Math.cos(0).to_i.object_id  # =&gt; 3
+</code></div>
+<p>Hence, there&#8217;s no way these objects can be duplicated through <tt>dup</tt> or <tt>clone</tt>:</p>
+<div class="code_container"><code class="ruby">
+true.dup  # =&gt; TypeError: can't dup TrueClass
+</code></div>
+<p>Some numbers which are not singletons are not duplicable either:</p>
+<div class="code_container"><code class="ruby">
+0.0.clone        # =&gt; allocator undefined for Float
+(2**1024).clone  # =&gt; allocator undefined for Bignum
+</code></div>
+<p>Active Support provides <tt>duplicable?</tt> to programmatically query an object about this property:</p>
+<div class="code_container"><code class="ruby">
+&quot;&quot;.duplicable?     # =&gt; true
+false.duplicable?  # =&gt; false
+</code></div>
+<p>By definition all objects are <tt>duplicable?</tt> except <tt>nil</tt>, <tt>false</tt>, <tt>true</tt>, symbols, numbers, and class objects.</p>
+<div class='warning'><p>Using <tt>duplicable?</tt> is discouraged because it depends on a hard-coded list. Classes have means to disallow duplication like removing <tt>dup</tt> and <tt>clone</tt> or raising exceptions from them, only <tt>rescue</tt> can tell.</p></div>
+<h4 id="returning">1.3 <tt>returning</tt></h4>
+<p>The method <tt>returning</tt> yields its argument to a block and returns it. You tipically use it with a mutable object that gets modified in the block:</p>
+<div class="code_container"><code class="ruby">
+def html_options_for_form(url_for_options, options, *parameters_for_url)
+  returning options.stringify_keys do |html_options|
+    html_options[&quot;enctype&quot;] = &quot;multipart/form-data&quot; if html_options.delete(&quot;multipart&quot;)
+    html_options[&quot;action&quot;]  = url_for(url_for_options, *parameters_for_url)
+  end
+end
+</code></div>
+<p>See also <a href="#tap"><tt>Object#tap</tt></a>.</p>
+<h4 id="tap">1.4 <tt>tap</tt></h4>
+<p><tt>Object#tap</tt> exists in Ruby 1.8.7 and 1.9, and it is defined by Active Support for previous versions. This method yields its receiver to a block and returns it.</p>
+<p>For example, the following class method from <tt>ActionDispatch::TestResponse</tt> creates, initializes, and returns a new test response using <tt>tap</tt>:</p>
+<div class="code_container"><code class="ruby">
+def self.from_response(response)
+  new.tap do |resp|
+    resp.status  = response.status
+    resp.headers = response.headers
+    resp.body    = response.body
+  end
+end
+</code></div>
+<p>See also <a href="#returning"><tt>Object#returning</tt></a>.</p>
+<h4 id="try">1.5 <tt>try</tt></h4>
+<p>Sometimes you want to call a method provided the receiver object is not <tt>nil</tt>, which is something you usually check first.</p>
+<p>For instance, note how this method of <tt>ActiveRecord::ConnectionAdapters::AbstractAdapter</tt> checks if there&#8217;s a <tt>@logger</tt>:</p>
+<div class="code_container"><code class="ruby">
+def log_info(sql, name, ms)
+  if @logger &amp;&amp; @logger.debug?
+    name = '%s (%.1fms)' % [name || 'SQL', ms]
+    @logger.debug(format_log_entry(name, sql.squeeze(' ')))
+  end
+end
+</code></div>
+<p>You can shorten that using <tt>Object#try</tt>. This method is a synonim for <tt>Object#send</tt> except that it returns <tt>nil</tt> if sent to <tt>nil</tt>. The previous example could then be rewritten as:</p>
+<div class="code_container"><code class="ruby">
+def log_info(sql, name, ms)
+  if @logger.try(:debug?)
+    name = '%s (%.1fms)' % [name || 'SQL', ms]
+    @logger.debug(format_log_entry(name, sql.squeeze(' ')))
+  end
+end
+</code></div>
+<h4 id="metaclass">1.6 <tt>metaclass</tt></h4>
+<p>The method <tt>metaclass</tt> returns the singleton class on any object:</p>
+<div class="code_container"><code class="ruby">
+String.metaclass     # =&gt; #&lt;Class:String&gt;
+String.new.metaclass # =&gt; #&lt;Class:#&lt;String:0x17a1d1c&gt;&gt;
+</code></div>
+<h4 id="class-evalargs-block">1.7 <tt>class_eval(*args, &block)</tt></h4>
+<p>You can evaluate code in the context of any object&#8217;s singleton class using <tt>class_eval</tt>:</p>
+<div class="code_container"><code class="ruby">
+class Proc
+  def bind(object)
+    block, time = self, Time.now
+    object.class_eval do
+      method_name = &quot;__bind_#{time.to_i}_#{time.usec}&quot;
+      define_method(method_name, &amp;block)
+      method = instance_method(method_name)
+      remove_method(method_name)
+      method
+    end.bind(object)
+  end
+end
+</code></div>
+<h4 id="acts-likeduck">1.8 <tt>acts_like?(duck)</tt></h4>
+<p>The method <tt>acts_like</tt> provides a way to check whether some class acts like some other class based on a simple convention: a class that provides the same interface as <tt>String</tt> defines</p>
+<div class="code_container"><code class="ruby">
+def acts_like_string?
+end
+</code></div>
+<p>which is only a marker, its body or return value are irrelevant. Then, client code can query for duck-type-safeness this way:</p>
+<div class="code_container"><code class="ruby">
+some_klass.acts_like?(:string)
+</code></div>
+<p>Rails has classes that act like <tt>Date</tt> or <tt>Time</tt> and follow this contract.</p>
+<h4 id="to-param">1.9 <tt>to_param</tt></h4>
+<p>All objects in Rails respond to the method <tt>to_param</tt>, which is meant to return something that represents them as values in a query string, or as a <span class="caps">URL</span> fragments.</p>
+<p>By default <tt>to_param</tt> just calls <tt>to_s</tt>:</p>
+<div class="code_container"><code class="ruby">
+7.to_param # =&gt; &quot;7&quot;
+</code></div>
+<p>The return value of <tt>to_param</tt> should <strong>not</strong> be escaped:</p>
+<div class="code_container"><code class="ruby">
+&quot;Tom &amp; Jerry&quot;.to_param # =&gt; &quot;Tom &amp; Jerry&quot;
+</code></div>
+<p>Several classes in Rails overwrite this method.</p>
+<p>For example <tt>nil</tt>, <tt>true</tt>, and <tt>false</tt> return themselves. <tt>Array#to_param</tt> calls <tt>to_param</tt> on the elements and joins the result with &#8220;/&#8221;:</p>
+<div class="code_container"><code class="ruby">
+[0, true, String].to_param # =&gt; &quot;0/true/String&quot;
+</code></div>
+<p>Notably, the Rails routing system calls <tt>to_param</tt> on models to get a value for the <tt>:id</tt> placeholder. <tt>ActiveRecord::Base#to_param</tt> returns the <tt>id</tt> of a model, but you can redefine that method in your models. For example, given</p>
+<div class="code_container"><code class="ruby">
+class User
+  def to_param
+    &quot;#{id}-#{name.parameterize}&quot;
+  end
+end
+</code></div>
+<p>we get:</p>
+<div class="code_container"><code class="ruby">
+user_path(@user) # =&gt; &quot;/users/357-john-smith&quot;
+</code></div>
+<div class='warning'><p>Controllers need to be aware of any redifinition of <tt>to_param</tt> because when a request like that comes in &#8220;357-john-smith&#8221; is the value of <tt>params[:id]</tt>.</p></div>
+<h4 id="to-query">1.10 <tt>to_query</tt></h4>
+<p>Except for hashes, given an unescaped <tt>key</tt> this method constructs the part of a query string that would map such key to what <tt>to_param</tt> returns. For example, given</p>
+<div class="code_container"><code class="ruby">
+class User
+  def to_param
+    &quot;#{id}-#{name.parameterize}&quot;
+  end
+end
+</code></div>
+<p>we get:</p>
+<div class="code_container"><code class="ruby">
+current_user.to_query('user') # =&gt; user=357-john-smith
+</code></div>
+<p>This method escapes whatever is needed, both for the key and the value:</p>
+<div class="code_container"><code class="ruby">
+account.to_query('company[name]')
+# =&gt; &quot;company%5Bname%5D=Johnson+%26+Johnson&quot;
+</code></div>
+<p>so its output is ready to be used in a query string.</p>
+<p>Arrays return the result of applying <tt>to_query</tt> to each element with <tt><em>key</em>[]</tt> as key, and join the result with &#8220;/&#8221;:</p>
+<div class="code_container"><code class="ruby">
+[3.4, -45.6].to_query('sample')
+# =&gt; &quot;sample%5B%5D=3.4&amp;sample%5B%5D=-45.6&quot;
+</code></div>
+<p>Hashes also respond to <tt>to_query</tt> but with a different signature. If no argument is passed a call generates a sorted series of key/value assigments calling <tt>to_query(key)</tt> on its values. Then it joins the result with &#8220;&amp;&#8221;:</p>
+<div class="code_container"><code class="ruby">
+{:c =&gt; 3, :b =&gt; 2, :a =&gt; 1}.to_query # =&gt; &quot;a=1&amp;b=2&amp;c=3&quot;
+</code></div>
+<p>The method <tt>Hash#to_query</tt> accepts an optional namespace for the keys:</p>
+<div class="code_container"><code class="ruby">
+{:id =&gt; 89, :name =&gt; &quot;John Smith&quot;}.to_query('user')
+# =&gt; &quot;user%5Bid%5D=89&amp;user%5Bname%5D=John+Smith&quot;
+</code></div>
+<h4 id="with-options">1.11 <tt>with_options</tt></h4>
+<p>The method <tt>with_options</tt> provides a way to factor out common options in a series of method calls.</p>
+<p>Given a default options hash, <tt>with_options</tt> yields a proxy object to a block. Within the block, methods called on the proxy are forwarded to the receiver with their options merged. For example, you get rid of the duplication in:</p>
+<div class="code_container"><code class="ruby">
+class Account &lt; ActiveRecord::Base
+  has_many :customers, :dependent =&gt; :destroy
+  has_many :products,  :dependent =&gt; :destroy
+  has_many :invoices,  :dependent =&gt; :destroy
+  has_many :expenses,  :dependent =&gt; :destroy
+end
+</code></div>
+<p>this way:</p>
+<div class="code_container"><code class="ruby">
+class Account &lt; ActiveRecord::Base
+  with_options :dependent =&gt; :destroy do |assoc|
+    assoc.has_many :customers
+    assoc.has_many :products
+    assoc.has_many :invoices
+    assoc.has_many :expenses
+  end
+end
+</code></div>
+<p>That idiom may convey <em>grouping</em> to the reader as well. For example, say you want to send a newsletter whose language depends on the user. Somewhere in the mailer you could group locale-dependent bits like this:</p>
+<div class="code_container"><code class="ruby">
+I18n.with_options :locale =&gt; user.locale, :scope =&gt; &quot;newsletter&quot; do |i18n|
+  subject i18n.t :subject
+  body    i18n.t :body, :user_name =&gt; user.name 
+end
+</code></div>
+<div class='info'><p>Since <tt>with_options</tt> forwards calls to its receiver they can be nested. Each nesting level will merge inherited defaults in addition to their own.</p></div>
+<h4 id="instance-variables">1.12 Instance Variables</h4>
+<p>Active Support provides several methods to ease access to instance variables.</p>
+<h5 id="instance-variable-defined">1.12.1 <tt>instance_variable_defined?</tt></h5>
+<p>The method <tt>instance_variable_defined?</tt> exists in Ruby 1.8.6 and later, and it is defined for previous versions anyway:</p>
+<div class="code_container"><code class="ruby">
+class C
+  def initialize
+    @a = 1
+  end
+
+  def m
+    @b = 2
+  end
+end
+
+c = C.new
+
+c.instance_variable_defined?(&quot;@a&quot;) # =&gt; true
+c.instance_variable_defined?(:@a)  # =&gt; true
+c.instance_variable_defined?(&quot;a&quot;)  # =&gt; NameError: `a' is not allowed as an instance variable name
+
+c.instance_variable_defined?(&quot;@b&quot;) # =&gt; false
+c.m
+c.instance_variable_defined?(&quot;@b&quot;) # =&gt; true
+</code></div>
+<h5 id="instance-variable-names">1.12.2 <tt>instance_variable_names</tt></h5>
+<p>Ruby 1.8 and 1.9 have a method called <tt>instance_variables</tt> that returns the names of the defined instance variables. But they behave differently, in 1.8 it returns strings whereas in 1.9 it returns symbols. Active Support defines <tt>instance_variable_names</tt> as a portable way to obtain them as strings:</p>
+<div class="code_container"><code class="ruby">
+class C
+  def initialize(x, y)
+    @x, @y = x, y
+  end
+end
+
+C.new(0, 1).instance_variable_names # =&gt; [&quot;@y&quot;, &quot;@x&quot;]
+</code></div>
+<div class='warning'><p>The order in which the names are returned is unespecified, and it indeed depends on the version of the interpreter.</p></div>
+<h5 id="instance-values">1.12.3 <tt>instance_values</tt></h5>
+<p>The method <tt>instance_values</tt> returns a hash that maps instance variable names without &#8220;@&#8221; to their
+corresponding values. Keys are strings both in Ruby 1.8 and 1.9:</p>
+<div class="code_container"><code class="ruby">
+class C
+  def initialize(x, y)
+    @x, @y = x, y
+  end
+end
+
+C.new(0, 1).instance_values # =&gt; {&quot;x&quot; =&gt; 0, &quot;y&quot; =&gt; 1}
+</code></div>
+<h5 id="copy-instance-variables-fromobject-exclude--">1.12.4 <tt>copy_instance_variables_from(object, exclude = [])</tt></h5>
+<p>Copies the instance variables of <tt>object</tt> into <tt>self</tt>.</p>
+<p>Instance variable names in the <tt>exclude</tt> array are ignored. If <tt>object</tt>
+responds to <tt>protected_instance_variables</tt> the ones returned are
+also ignored. For example, Rails controllers implement that method.</p>
+<p>In both arrays strings and symbols are understood, and they have to include
+the at sign.</p>
+<div class="code_container"><code class="ruby">
+class C
+  def initialize(x, y, z)
+    @x, @y, @z = x, y, z
+  end
+
+  def protected_instance_variables
+    %w(@z)
+  end
+end
+
+a = C.new(0, 1, 2)
+b = C.new(3, 4, 5)
+
+a.copy_instance_variables_from(b, [:@y])
+# a is now: @x = 3, @y = 1, @z = 2
+</code></div>
+<p>In the example <tt>object</tt> and <tt>self</tt> are of the same type, but they don&#8217;t need to.</p>
+<h4 id="silencing-warnings-streams-and-exceptions">1.13 Silencing Warnings, Streams, and Exceptions</h4>
+<p>The methods <tt>silence_warnings</tt> and <tt>enable_warnings</tt> change the value of <tt>$VERBOSE</tt> accordingly for the duration of their block, and reset it afterwards:</p>
+<div class="code_container"><code class="ruby">
+silence_warnings { Object.const_set &quot;RAILS_DEFAULT_LOGGER&quot;, logger }
+</code></div>
+<p>You can silence any stream while a block runs with <tt>silence_stream</tt>:</p>
+<div class="code_container"><code class="ruby">
+silence_stream(STDOUT) do
+  # STDOUT is silent here
+end
+</code></div>
+<p>Silencing exceptions is also possible with <tt>suppress</tt>. This method receives an arbitrary number of exception classes. If an exception is raised during the execution of the block and is <tt>kind_of?</tt> any of the arguments, <tt>suppress</tt> captures it and returns silently. Otherwise the exception is reraised:</p>
+<div class="code_container"><code class="ruby">
+# If the user is locked the increment is lost, no big deal.
+suppress(ActiveRecord::StaleObjectError) do
+  current_user.increment! :visits
+end
+</code></div>
+<h3 id="extensions-to-module">2 Extensions to <tt>Module</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-class">3 Extensions to <tt>Class</tt></h3>
+<h4 id="class-attribute-accessors">3.1 Class Attribute Accessors</h4>
+<p>The macros <tt>cattr_reader</tt>, <tt>cattr_writer</tt>, and <tt>cattr_accessor</tt> are analogous to their <tt>attr_*</tt> counterparts but for classes. They initialize a class variable to <tt>nil</tt> unless it already exists, and generate the corresponding class methods to access it:</p>
+<div class="code_container"><code class="ruby">
+class MysqlAdapter &lt; AbstractAdapter
+  # Generates class methods to access @@emulate_booleans.
+  cattr_accessor :emulate_booleans
+  self.emulate_booleans = true
+end
+</code></div>
+<p>Instance methods are created as well for convenience. For example given</p>
+<div class="code_container"><code class="ruby">
+module ActionController
+  class Base
+    cattr_accessor :logger
+  end
+end
+</code></div>
+<p>we can access <tt>logger</tt> in actions. The generation of the writer instance method can be prevented setting <tt>:instance_writer</tt> to <tt>false</tt> (not any false value, but exactly <tt>false</tt>):</p>
+<div class="code_container"><code class="ruby">
+module ActiveRecord
+  class Base
+    # No pluralize_table_names= instance writer is generated.
+    cattr_accessor :pluralize_table_names, :instance_writer =&gt; false
+  end
+end
+</code></div>
+<h4 id="class-inheritable-attributes">3.2 Class Inheritable Attributes</h4>
+<p>Class variables are shared down the inheritance tree. Class instance variables are not shared, but they are not inherited either. The macros <tt>class_inheritable_reader</tt>, <tt>class_inheritable_writer</tt>, and <tt>class_inheritable_accessor</tt> provide accesors for class-level data which is inherited but not shared with children:</p>
+<div class="code_container"><code class="ruby">
+module ActionController
+  class Base
+    # FIXME: REVISE/SIMPLIFY THIS COMMENT.
+    # The value of allow_forgery_protection is inherited,
+    # but its value in a particular class does not affect
+    # the value in the rest of the controllers hierarchy.
+    class_inheritable_accessor :allow_forgery_protection
+  end
+end
+</code></div>
+<p>They accomplish this with class instance variables and cloning on subclassing, there are no class variables involved. Cloning is performed with <tt>dup</tt> as long as the value is duplicable.</p>
+<p>There are some variants specialised in arrays and hashes:</p>
+<div class="code_container"><code class="ruby">
+class_inheritable_array
+class_inheritable_hash
+</code></div>
+<p>Those writers take any inherited array or hash into account and extend them rather than overwrite them.</p>
+<p>As with vanilla class attribute accessors these macros create convenience instance methods for reading and writing. The generation of the writer instance method can be prevented setting <tt>:instance_writer</tt> to <tt>false</tt> (not any false value, but exactly <tt>false</tt>):</p>
+<div class="code_container"><code class="ruby">
+module ActiveRecord
+  class Base
+    class_inheritable_accessor :default_scoping, :instance_writer =&gt; false
+  end
+end
+</code></div>
+<p>Since values are copied when a subclass is defined, if the base class changes the attribute after that, the subclass does not see the new value. That&#8217;s the point.</p>
+<p>There&#8217;s a related macro called <tt>superclass_delegating_accessor</tt>, however, that does not copy the value when the base class is subclassed. Instead, it delegates reading to the superclass as long as the attribute is not set via its own writer. For example, <tt>ActionMailer::Base</tt> defines <tt>delivery_method</tt> this way:</p>
+<div class="code_container"><code class="ruby">
+module ActionMailer
+  class Base
+    superclass_delegating_accessor :delivery_method
+    self.delivery_method = :smtp
+  end
+end
+</code></div>
+<p>If for whatever reason an application loads the definition of a mailer class and after that sets <tt>ActionMailer::Base.delivery_method</tt>, the mailer class will still see the new value. In addition, the mailer class is able to change the <tt>delivery_method</tt> without affecting the value in the parent using its own inherited class attribute writer.</p>
+<h4 id="subclasses">3.3 Subclasses</h4>
+<p>The <tt>subclasses</tt> method returns the names of all subclasses of a given class as an array of strings. That comprises not only direct subclasses, but all descendants down the hierarchy:</p>
+<div class="code_container"><code class="ruby">
+class C; end
+C.subclasses # =&gt; []
+
+Integer.subclasses # =&gt; [&quot;Bignum&quot;, &quot;Fixnum&quot;]
+
+module M
+  class A; end
+  class B1 &lt; A; end
+  class B2 &lt; A; end
+end
+
+module N
+  class C &lt; M::B1; end
+end
+
+M::A.subclasses # =&gt; [&quot;N::C&quot;, &quot;M::B2&quot;, &quot;M::B1&quot;]
+</code></div>
+<p>The order in which these class names are returned is unspecified.</p>
+<p>See also <tt>Object#subclasses_of</tt> in <a href="FIXME">Extensions to All Objects <span class="caps">FIX</span> <span class="caps">THIS</span> <span class="caps">LINK</span></a>.</p>
+<h4 id="class-removal">3.4 Class Removal</h4>
+<p>Roughly speaking, the <tt>remove_class</tt> method removes the class objects passed as arguments:</p>
+<div class="code_container"><code class="ruby">
+Class.remove_class(Hash, Dir) # =&gt; [Hash, Dir]
+Hash # =&gt; NameError: uninitialized constant Hash
+Dir  # =&gt; NameError: uninitialized constant Dir
+</code></div>
+<p>More specifically, <tt>remove_class</tt> attempts to remove constants with the same name as the passed class objects from their parent modules. So technically this method does not guarantee the class objects themselves are not still valid and alive somewhere after the method call:</p>
+<div class="code_container"><code class="ruby">
+module M
+  class A; end
+  class B &lt; A; end
+end
+
+A2 = M::A
+
+M::A.object_id            # =&gt; 13053950
+Class.remove_class(M::A)
+
+M::B.superclass.object_id # =&gt; 13053950 (same object as before)
+A2.name                   # =&gt; &quot;M::A&quot; (name is hard-coded in object)
+</code></div>
+<div class='warning'><p>Removing fundamental classes like <tt>String</tt> can result in really funky behaviour.</p></div>
+<p>The method <tt>remove_subclasses</tt> provides a shortcut for removing all descendants of a given class, where &#8220;removing&#8221; has the meaning explained above:</p>
+<div class="code_container"><code class="ruby">
+class A; end
+class B1 &lt; A; end
+class B2 &lt; A; end
+class C &lt; A; end
+
+A.subclasses        # =&gt; [&quot;C&quot;, &quot;B2&quot;, &quot;B1&quot;]
+A.remove_subclasses
+A.subclasses        # =&gt; []
+C                   # =&gt; NameError: uninitialized constant C
+</code></div>
+<p>See also <tt>Object#remove_subclasses_of</tt> in <a href="FIXME">Extensions to All Objects <span class="caps">FIX</span> <span class="caps">THIS</span> <span class="caps">LINK</span></a>.</p>
+<h3 id="extensions-to-nilclass">4 Extensions to <tt>NilClass</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-trueclass">5 Extensions to <tt>TrueClass</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-falseclass">6 Extensions to <tt>FalseClass</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-symbol">7 Extensions to <tt>Symbol</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-string">8 Extensions to <tt>String</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-numeric">9 Extensions to <tt>Numeric</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-integer">10 Extensions to <tt>Integer</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-float">11 Extensions to <tt>Float</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-bigdecimal">12 Extensions to <tt>BigDecimal</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-enumerable">13 Extensions to <tt>Enumerable</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-array">14 Extensions to <tt>Array</tt></h3>
+<h4 id="accessing">14.1 Accessing</h4>
+<p>Active Support augments the <span class="caps">API</span> of arrays to ease certain ways of accessing them. For example, <tt>to</tt> returns the subarray of elements up to the one at the passed index:</p>
+<div class="code_container"><code class="ruby">
+%w(a b c d).to(2) # =&gt; %w(a b c)
+[].to(7)          # =&gt; []
+</code></div>
+<p>Similarly, <tt>from</tt> returns the tail from the element at the passed index on:</p>
+<div class="code_container"><code class="ruby">
+%w(a b c d).from(2)  # =&gt; %w(c d)
+%w(a b c d).from(10) # =&gt; nil
+[].from(0)           # =&gt; nil
+</code></div>
+<p>The methods <tt>second</tt>, <tt>third</tt>, <tt>fourth</tt>, and <tt>fifth</tt> return the corresponding element (<tt>first</tt> is builtin). Thanks to social wisdom and positive constructiveness all around, <tt>forty_two</tt> is also available.</p>
+<p>You can pick a random element with <tt>rand</tt>:</p>
+<div class="code_container"><code class="ruby">
+shape_type = [Circle, Square, Triangle].rand
+</code></div>
+<h4 id="grouping">14.2 Grouping</h4>
+<h5 id="in-groups-ofnumber-fill-with--nil">14.2.1 <tt>in_groups_of(number, fill_with = nil)</tt></h5>
+<p>The method <tt>in_groups_of</tt> splits an array into consecutive groups of a certain size. It returns an array with the groups:</p>
+<div class="code_container"><code class="ruby">
+[1, 2, 3].in_groups_of(2) # =&gt; [[1, 2], [3, nil]]
+</code></div>
+<p>or yields them in turn if a block is passed:</p>
+<div class="code_container"><code class="ruby">
+&lt;% sample.in_groups_of(3) do |a, b, c| %&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;%=h a %&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;%=h b %&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;%=h c %&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;% end %&gt;
+</code></div>
+<p>The first example shows <tt>in_groups_of</tt> fills the last group with as many <tt>nil</tt> elements as needed to have the requested size. You can change this padding value using the second optional argument:</p>
+<div class="code_container"><code class="ruby">
+[1, 2, 3].in_groups_of(2, 0) # =&gt; [[1, 2], [3, 0]]
+</code></div>
+<p>And you can tell the method not to fill the last group passing <tt>false</tt>:</p>
+<div class="code_container"><code class="ruby">
+[1, 2, 3].in_groups_of(2, false) # =&gt; [[1, 2], [3]]
+</code></div>
+<p>As a consequence <tt>false</tt> can&#8217;t be a used as a padding value.</p>
+<h5 id="in-groupsnumber-fill-with--nil">14.2.2 <tt>in_groups(number, fill_with = nil)</tt></h5>
+<p>The method <tt>in_groups</tt> splits an array into a certain number of groups. The method returns and array with the groups:</p>
+<div class="code_container"><code class="ruby">
+%w(1 2 3 4 5 6 7).in_groups(3)
+# =&gt; [[&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], [&quot;4&quot;, &quot;5&quot;, nil], [&quot;6&quot;, &quot;7&quot;, nil]]
+</code></div>
+<p>or yields them in turn if a block is passed:</p>
+<div class="code_container"><code class="ruby">
+%w(1 2 3 4 5 6 7).in_groups(3) {|group| p group}
+[&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]
+[&quot;4&quot;, &quot;5&quot;, nil]
+[&quot;6&quot;, &quot;7&quot;, nil]
+</code></div>
+<p>The examples above show that <tt>in_groups</tt> fills some groups with a trailing <tt>nil</tt> element as needed. A group can get at most one of these extra elements, the rightmost one if any. And the groups that have them are always the last ones.</p>
+<p>You can change this padding value using the second optional argument:</p>
+<div class="code_container"><code class="ruby">
+%w(1 2 3 4 5 6 7).in_groups(3, &quot;0&quot;)
+# =&gt; [[&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], [&quot;4&quot;, &quot;5&quot;, &quot;0&quot;], [&quot;6&quot;, &quot;7&quot;, &quot;0&quot;]]
+</code></div>
+<p>And you can tell the method not to fill the smaller groups passing <tt>false</tt>:</p>
+<div class="code_container"><code class="ruby">
+%w(1 2 3 4 5 6 7).in_groups(3, false)
+# =&gt; [[&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], [&quot;4&quot;, &quot;5&quot;], [&quot;6&quot;, &quot;7&quot;]]
+</code></div>
+<p>As a consequence <tt>false</tt> can&#8217;t be a used as a padding value.</p>
+<h5 id="splitvalue--nil">14.2.3 <tt>split(value = nil)</tt></h5>
+<p>The method <tt>split</tt> divides an array by a separator and returns the resulting chunks.</p>
+<p>If a block is passed the separators are those elements of the array for which the block returns true:</p>
+<div class="code_container"><code class="ruby">
+(-5..5).to_a.split { |i| i.multiple_of?(4) }
+# =&gt; [[-5], [-3, -2, -1], [1, 2, 3], [5]]
+</code></div>
+<p>Otherwise, the value received as argument, which defaults to <tt>nil</tt>, is the separator:</p>
+<div class="code_container"><code class="ruby">
+[0, 1, -5, 1, 1, &quot;foo&quot;, &quot;bar&quot;].split(1)
+# =&gt; [[0], [-5], [], [&quot;foo&quot;, &quot;bar&quot;]]
+</code></div>
+<div class='note'><p>Observe in the previous example that consecutive separators result in empty arrays.</p></div>
+<h3 id="extensions-to-hash">15 Extensions to <tt>Hash</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-range">16 Extensions to <tt>Range</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-proc">17 Extensions to <tt>Proc</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-date">18 Extensions to <tt>Date</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-datetime">19 Extensions to <tt>DateTime</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-time">20 Extensions to <tt>Time</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-process">21 Extensions to <tt>Process</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-pathname">22 Extensions to <tt>Pathname</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-file">23 Extensions to <tt>File</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-exception">24 Extensions to <tt>Exception</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-nameerror">25 Extensions to <tt>NameError</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-loaderror">26 Extensions to <tt>LoadError</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-cgi">27 Extensions to <tt>CGI</tt></h3>
+<p>&#8230;</p>
+<h3 id="extensions-to-benchmark">28 Extensions to <tt>Benchmark</tt></h3>
+<p>&#8230;</p>
+<h3 id="changelog">29 Changelog</h3>
+<p><a href="https://rails.lighthouseapp.com/projects/16213/tickets/67">Lighthouse ticket</a></p>
+<ul>
+	<li>April 18, 2009: Initial version by <a href="credits.html#fxn">Xavier Noria</a></li>
+</ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0</a> License</a></p>
+      <p>"Rails", "Ruby on Rails", and the Rails logo are trademarks of David Heinemeier Hansson. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>

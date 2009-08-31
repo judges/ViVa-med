@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ActionController::Integration::Session</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ActionController::Integration::Session</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/vendor/rails/actionpack/lib/action_controller/testing/integration_rb.html">
+                vendor/rails/actionpack/lib/action_controller/testing/integration.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="../../Object.html">
+                Object
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+An integration <a href="Session.html">Session</a> instance represents a set
+of requests and responses performed sequentially by some virtual user.
+Because you can instantiate multiple sessions and run them side-by-side,
+you can also mimic (to some limited extent) multiple simultaneous users
+interacting with your system.
+</p>
+<p>
+Typically, you will instantiate a <a href="Session.html#M000595">new</a>
+session using IntegrationTest#open_session, rather than instantiating <a
+href="Session.html">Integration::Session</a> directly.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000594">cookies</a>&nbsp;&nbsp;
+      <a href="#M000599">host!</a>&nbsp;&nbsp;
+      <a href="#M000597">https!</a>&nbsp;&nbsp;
+      <a href="#M000598">https?</a>&nbsp;&nbsp;
+      <a href="#M000595">new</a>&nbsp;&nbsp;
+      <a href="#M000596">reset!</a>&nbsp;&nbsp;
+      <a href="#M000600">url_for</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name">Test::Unit::Assertions</span>
+        <span class="include-name">ActionDispatch::Assertions</span>
+        <span class="include-name"><a href="../TestProcess.html">ActionController::TestProcess</a></span>
+        <span class="include-name"><a href="RequestHelpers.html">RequestHelpers</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">DEFAULT_HOST</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;www.example.com&quot;</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">accept</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The Accept header to send.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">controller</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+A reference to the controller instance used by the last request.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">host</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The hostname used in the last request.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">remote_addr</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The remote_addr used in the last request.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">request</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+A reference to the request instance used by the last request.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">request_count</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+A running counter of the number of requests processed.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">response</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+A reference to the response instance used by the last request.
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000595" class="method-detail">
+        <a name="M000595"></a>
+
+        <div class="method-heading">
+          <a href="#M000595" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">(app = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Create and initialize a <a href="Session.html#M000595">new</a> <a
+href="Session.html">Session</a> instance.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000595-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000595-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/testing/integration.rb, line 171</span>
+171:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">app</span> = <span class="ruby-keyword kw">nil</span>)
+172:         <span class="ruby-ivar">@app</span> = <span class="ruby-identifier">app</span> <span class="ruby-operator">||</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Dispatcher</span>.<span class="ruby-identifier">new</span>
+173:         <span class="ruby-identifier">reset!</span>
+174:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000594" class="method-detail">
+        <a name="M000594"></a>
+
+        <div class="method-heading">
+          <a href="#M000594" class="method-signature">
+          <span class="method-name">cookies</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A map of the <a href="Session.html#M000594">cookies</a> returned by the
+last response, and which will be sent with the next request.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000594-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000594-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/testing/integration.rb, line 154</span>
+154:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cookies</span>
+155:         <span class="ruby-ivar">@mock_session</span>.<span class="ruby-identifier">cookie_jar</span>
+156:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000599" class="method-detail">
+        <a name="M000599"></a>
+
+        <div class="method-heading">
+          <a href="#M000599" class="method-signature">
+          <span class="method-name">host!</span><span class="method-args">(name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set the host name to use in the next request.
+</p>
+<pre>
+  session.host! &quot;www.example.com&quot;
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000599-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000599-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/testing/integration.rb, line 225</span>
+225:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">host!</span>(<span class="ruby-identifier">name</span>)
+226:         <span class="ruby-ivar">@host</span> = <span class="ruby-identifier">name</span>
+227:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000597" class="method-detail">
+        <a name="M000597"></a>
+
+        <div class="method-heading">
+          <a href="#M000597" class="method-signature">
+          <span class="method-name">https!</span><span class="method-args">(flag = true)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specify whether or not the session should mimic a secure HTTPS request.
+</p>
+<pre>
+  session.https!
+  session.https!(false)
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000597-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000597-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/testing/integration.rb, line 209</span>
+209:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">https!</span>(<span class="ruby-identifier">flag</span> = <span class="ruby-keyword kw">true</span>)
+210:         <span class="ruby-ivar">@https</span> = <span class="ruby-identifier">flag</span>
+211:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000598" class="method-detail">
+        <a name="M000598"></a>
+
+        <div class="method-heading">
+          <a href="#M000598" class="method-signature">
+          <span class="method-name">https?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return <tt>true</tt> if the session is mimicking a secure HTTPS request.
+</p>
+<pre>
+  if session.https?
+    ...
+  end
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000598-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000598-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/testing/integration.rb, line 218</span>
+218:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">https?</span>
+219:         <span class="ruby-ivar">@https</span>
+220:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000596" class="method-detail">
+        <a name="M000596"></a>
+
+        <div class="method-heading">
+          <a href="#M000596" class="method-signature">
+          <span class="method-name">reset!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Resets the instance. This can be used to reset the state information in an
+existing session instance, so it can be used from a clean-slate condition.
+</p>
+<pre>
+  session.reset!
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000596-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000596-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/testing/integration.rb, line 181</span>
+181:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reset!</span>
+182:         <span class="ruby-ivar">@https</span> = <span class="ruby-keyword kw">false</span>
+183:         <span class="ruby-ivar">@mock_session</span> = <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">MockSession</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@app</span>, <span class="ruby-constant">DEFAULT_HOST</span>)
+184:         <span class="ruby-ivar">@controller</span> = <span class="ruby-ivar">@request</span> = <span class="ruby-ivar">@response</span> = <span class="ruby-keyword kw">nil</span>
+185:         <span class="ruby-ivar">@request_count</span> = <span class="ruby-value">0</span>
+186: 
+187:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">host</span>        = <span class="ruby-constant">DEFAULT_HOST</span>
+188:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">remote_addr</span> = <span class="ruby-value str">&quot;127.0.0.1&quot;</span>
+189:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">accept</span>      = <span class="ruby-value str">&quot;text/xml,application/xml,application/xhtml+xml,&quot;</span> <span class="ruby-operator">+</span>
+190:                            <span class="ruby-value str">&quot;text/html;q=0.9,text/plain;q=0.8,image/png,&quot;</span> <span class="ruby-operator">+</span>
+191:                            <span class="ruby-value str">&quot;*/*;q=0.5&quot;</span>
+192: 
+193:         <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span> <span class="ruby-ivar">@named_routes_configured</span>
+194:           <span class="ruby-comment cmt"># install the named routes in this session instance.</span>
+195:           <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">metaclass</span>
+196:           <span class="ruby-constant">Routing</span><span class="ruby-operator">::</span><span class="ruby-constant">Routes</span>.<span class="ruby-identifier">install_helpers</span>(<span class="ruby-identifier">klass</span>)
+197: 
+198:           <span class="ruby-comment cmt"># the helpers are made protected by default--we make them public for</span>
+199:           <span class="ruby-comment cmt"># easier access during testing and troubleshooting.</span>
+200:           <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">module_eval</span> { <span class="ruby-identifier">public</span> <span class="ruby-operator">*</span><span class="ruby-constant">Routing</span><span class="ruby-operator">::</span><span class="ruby-constant">Routes</span>.<span class="ruby-identifier">named_routes</span>.<span class="ruby-identifier">helpers</span> }
+201:           <span class="ruby-ivar">@named_routes_configured</span> = <span class="ruby-keyword kw">true</span>
+202:         <span class="ruby-keyword kw">end</span>
+203:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000600" class="method-detail">
+        <a name="M000600"></a>
+
+        <div class="method-heading">
+          <a href="#M000600" class="method-signature">
+          <span class="method-name">url_for</span><span class="method-args">(options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the URL for the given options, according to the rules specified in
+the application&#8216;s routes.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000600-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000600-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/testing/integration.rb, line 231</span>
+231:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">options</span>)
+232:         <span class="ruby-identifier">controller</span> <span class="ruby-value">?
+233: </span>          <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">options</span>) <span class="ruby-operator">:</span>
+234:           <span class="ruby-identifier">generic_url_rewriter</span>.<span class="ruby-identifier">rewrite</span>(<span class="ruby-identifier">options</span>)
+235:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

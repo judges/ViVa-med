@@ -1,0 +1,181 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>AJAX on Rails</title>
+
+<link rel="stylesheet" type="text/css" href="files/stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="files/stylesheets/syntax.css" />
+<link rel="stylesheet" type="text/css" href="files/stylesheets/print.css" media="print" />
+
+<script type="text/javascript" src="files/javascripts/guides.js"></script>
+<script type="text/javascript" src="files/javascripts/code_highlighter.js"></script>
+<script type="text/javascript" src="files/javascripts/highlighters.js"></script>
+
+</head>
+<body class="guide">
+  <div id="topNav">
+    <div class="wrapper">
+      <strong>More at <a href="http://rubyonrails.org/">rubyonrails.org:</a> </strong>
+      <a href="http://rubyonrails.org/">Overview</a> |
+      <a href="http://rubyonrails.org/download">Download</a> |
+      <a href="http://rubyonrails.org/deploy">Deploy</a> |
+      <a href="http://rails.lighthouseapp.com/projects/8994-ruby-on-rails/overview">Code</a> |
+      <a href="http://rubyonrails.org/screencasts">Screencasts</a> |
+      <a href="http://rubyonrails.org/documentation">Documentation</a> |
+      <a href="http://rubyonrails.org/ecosystem">Ecosystem</a> |
+      <a href="http://rubyonrails.org/community">Community</a> |
+      <a href="http://weblog.rubyonrails.org/">Blog</a>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1><a href="index.html" title="Return to home page">Guides.rubyonrails.org</a></h1>
+      <p class="hide"><a href="#mainCol">Skip navigation</a>.</p>
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li class="index"><a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu">Guides Index</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+            <dl class="L">
+              <dt>Start Here</dt>
+              <dd><a href="getting_started.html">Getting Started with Rails</a></dd>
+              <dt>Models</dt>
+              <dd><a href="migrations.html">Rails Database Migrations</a></dd>
+              <dd><a href="activerecord_validations_callbacks.html">Active Record Validations and Callbacks</a></dd>
+              <dd><a href="association_basics.html">Active Record Associations</a></dd>
+              <dd><a href="active_record_querying.html">Active Record Query Interface</a></dd>
+              <dt>Views</dt>
+              <dd><a href="layouts_and_rendering.html">Layouts and Rendering in Rails</a></dd>
+              <dd><a href="form_helpers.html">Action View Form Helpers</a></dd>
+              <dt>Controllers</dt>
+              <dd><a href="action_controller_overview.html">Action Controller Overview</a></dd>
+              <dd><a href="routing.html">Rails Routing from the Outside In</a></dd>
+            </dl>
+            <dl class="R">
+              <dt>Digging Deeper</dt>
+              <dd><a href="i18n.html">Rails Internationalization API</a></dd>
+              <dd><a href="action_mailer_basics.html">Action Mailer Basics</a></dd>
+              <dd><a href="testing.html">Testing Rails Applications</a></dd>
+              <dd><a href="security.html">Securing Rails Applications</a></dd>
+              <dd><a href="debugging_rails_applications.html">Debugging Rails Applications</a></dd>
+              <dd><a href="performance_testing.html">Performance Testing Rails Applications</a></dd>
+              <dd><a href="plugins.html">The Basics of Creating Rails Plugins</a></dd>
+              <dd><a href="configuring.html">Configuring Rails Applications</a></dd>
+              <dd><a href="rails_on_rack.html">Rails on Rack</a></dd>
+              <dd><a href="command_line.html">Rails Command Line Tools and Rake Tasks</a></dd>
+              <dd><a href="caching_with_rails.html">Caching with Rails</a></dd>
+              <dd><a href="contributing_to_rails.html">Contributing to Rails</a></dd>
+            </dl>
+          </div>
+        </li>
+        <li><a href="contribute.html">Contribute</a></li>
+        <li><a href="credits.html">Credits</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2><span class="caps">AJAX</span> on Rails</h2>
+<p>This guide covers the built-in Ajax/Javascript functionality of Rails (and more); it will enable you to create rich and dynamic <span class="caps">AJAX</span> applications with ease! We will cover the following topics:</p>
+<ul>
+	<li>Quick introduction to <span class="caps">AJAX</span> and related technologies</li>
+	<li>Handling Javascript the Rails way: Rails helpers, <span class="caps">RJS</span>, Prototype and script.aculo.us</li>
+	<li>Testing Javascript functionality</li>
+	<li>Becoming an Ajax Master on Rails: Plugins, Best Practices, Tips and Tricks</li>
+</ul>
+
+            <div id="subCol">
+        <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+        <ol class="chapters">
+<li><a href="#hello-ajax---a-quick-intro">Hello <span class="caps">AJAX</span> &#8211; a Quick Intro</a><ul><li><a href="#asynchronous-javascript--xml">Asynchronous Javascript + <span class="caps">XML</span></a></li><li><a href="#the-dom">The <span class="caps">DOM</span></a></li><li><a href="#standard-html-communication-vs-ajax">Standard <span class="caps">HTML</span> communication vs <span class="caps">AJAX</span></a></li></ul></li><li><a href="#built-in-rails-helpers">Built-in Rails Helpers</a><ul></ul></li><li><a href="#responding-to-ajax-the-rails-way-rjs">Responding to <span class="caps">AJAX</span> the Rails way: <span class="caps">RJS</span></a><ul></ul></li><li><a href="#i-want-my-yellow-thingy-prototype-and-scriptaculous">I Want my Yellow Thingy: Prototype and Script.aculo.us</a><ul></ul></li><li><a href="#testing-javascript">Testing Javascript</a><ul></ul></li><li><a href="#useful-plugins">Useful Plugins</a><ul></ul></li><li><a href="#tips-and-tricks">Tips and Tricks</a><ul></ul></li></ol></div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <h3 id="hello-ajax---a-quick-intro">1 Hello <span class="caps">AJAX</span> &#8211; a Quick Intro</h3>
+<p>If you are a &#8216;show me the code&#8217; type of person, you might want to skip this part and jump to the <span class="caps">RJS</span> section right away. However, I would really recommend to read it &#8211; you&#8217;ll need the basics of <span class="caps">DOM</span>, http requests and other topics discussed here to really understand Ajax on Rails.</p>
+<h4 id="asynchronous-javascript--xml">1.1 Asynchronous Javascript + <span class="caps">XML</span></h4>
+<p>Basic terminology, new style of creating web apps</p>
+<h4 id="the-dom">1.2 The <span class="caps">DOM</span></h4>
+<p>basics of the <span class="caps">DOM</span>, how is it built, properties, features, why is it central to <span class="caps">AJAX</span></p>
+<h4 id="standard-html-communication-vs-ajax">1.3 Standard <span class="caps">HTML</span> communication vs <span class="caps">AJAX</span></h4>
+<p>How do &#8216;standard&#8217; and <span class="caps">AJAX</span> requests differ, why does this matter for understanding <span class="caps">AJAX</span> on Rails (tie in for *_remote helpers, the next section)</p>
+<h3 id="built-in-rails-helpers">2 Built-in Rails Helpers</h3>
+<p>Mostly a reference to standard JS helpers like link_to_remote, remote_form_for etc + some explanation</p>
+<h3 id="responding-to-ajax-the-rails-way-rjs">3 Responding to <span class="caps">AJAX</span> the Rails way: <span class="caps">RJS</span></h3>
+<p>In the last section we sent some <span class="caps">AJAX</span> requests to the server; now we need to respond, and the standard Rails way to this is using <span class="caps">RJS</span>; <span class="caps">RJS</span> intro, function reference</p>
+<h3 id="i-want-my-yellow-thingy-prototype-and-scriptaculous">4 I Want my Yellow Thingy: Prototype and Script.aculo.us</h3>
+<p>Walk through prototype and script.aculo.us, most important functionality, method reference etc.</p>
+<h3 id="testing-javascript">5 Testing Javascript</h3>
+<p>Javascript testing reminds me the definition of the world &#8216;classic&#8217; by Mark Twain: &#8220;A classic is something that everybody wants to have read and nobody wants to read.&#8221; It&#8217;s similar with Javascript testing: everyone would like to have it, yet it&#8217;s not done by too much developers as it is tedious, complicated, there is a proliferation of tools and no consensus/accepted best practices, but we will nevertheless take a stab at it:</p>
+<ul>
+	<li>(Fire)Watir</li>
+	<li>Selenium</li>
+	<li>Celerity/Culerity</li>
+	<li>Cucumber+Webrat</li>
+	<li>Mention stuff like screw.unit/jsSpec</li>
+</ul>
+<p>Note to self: check out the RailsConf JS testing video</p>
+<h3 id="useful-plugins">6 Useful Plugins</h3>
+<p>This was in the ticket description, but at the moment I don&#8217;t really have clue what to add here, so please tell me</p>
+<h3 id="tips-and-tricks">7 Tips and Tricks</h3>
+<ul>
+	<li>Unobtrusive Javascript (Prototype events, maybe the jQuery way (esp. jQeury.live()))</li>
+</ul>
+<ul>
+	<li>Minimize communication with the server &#8211; there does not have to be a communication at all!
+	<ul>
+		<li>If you absolutely don&#8217;t have to, don&#8217;t use Rails observers</li>
+		<li>Cache stuff on the client side, e.g. with auto-complete</li>
+	</ul></li>
+</ul>
+<ul>
+	<li>Using <span class="caps">AJAX</span> to load stuff asynchronously
+	<ul>
+		<li>To avoid page blocking</li>
+		<li>Tricking page caching
+		<ul>
+			<li>inserting user-specific info into a cached page</li>
+			<li>anti-<span class="caps">CSFR</span> bit</li>
+		</ul></li>
+	</ul></li>
+</ul>
+<ul>
+	<li>Jumping to the top? Try event.stopPropagation</li>
+</ul>
+<ul>
+	<li>Performance
+	<ul>
+		<li>pack your javascript (minify, asset packager)</li>
+		<li>require your JS at the end of the file</li>
+		<li>other perf tricks and optimization</li>
+	</ul></li>
+</ul>
+<ul>
+	<li>Don&#8217;t overuse <span class="caps">AJAX</span>
+	<ul>
+		<li>Usability first, cool effects second</li>
+		<li>situations where <span class="caps">AJAX</span> is discouraged</li>
+	</ul></li>
+</ul>
+<ul>
+	<li>Last but not least: Javascript is your friend :)</li>
+</ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0</a> License</a></p>
+      <p>"Rails", "Ruby on Rails", and the Rails logo are trademarks of David Heinemeier Hansson. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>

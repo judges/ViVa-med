@@ -1,0 +1,39 @@
+<h1>New doctor</h1>
+
+<% form_for(@doctor) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :firstname %><br />
+    <%= f.text_field :firstname %>
+  </p>
+  <p>
+    <%= f.label :lastname %><br />
+    <%= f.text_field :lastname %>
+  </p>
+  <p>
+    <%= f.label :initials %><br />
+    <%= f.text_field :initials %>
+  </p>
+  <p>
+    <%= f.label :birthdate %><br />
+    <%= f.date_select("birthdate", :start_year => 1930, :prompt => { :day => 'Select day', :month => 'Select month', :year => 'Select year' }) %>
+  </p>
+  <p>
+  <!--
+    <%= f.label :proffesion_id %><br />
+    <%= f.text_field :proffesion_id %>
+  -->
+    <%= select("doctor", :proffesion_id, Proffesion.all.collect {|p| [ p.name, p.id ] } ) %>
+    <%= link_to "New proffesion",  new_proffesion_path %>
+  </p>
+  <p>
+    <%= f.label :portfollio_id %><br />
+    <%= f.text_field :portfollio_id %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', doctors_path %>

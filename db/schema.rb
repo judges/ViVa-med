@@ -9,13 +9,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090813050423) do
+ActiveRecord::Schema.define(:version => 20090825044933) do
 
-  create_table "patsients", :force => true do |t|
-    t.integer  "p_id"
+  create_table "doctors", :force => true do |t|
     t.string   "firstname"
     t.string   "lastname"
     t.string   "initials"
+    t.date     "birthdate"
+    t.integer  "proffesion_id"
+    t.integer  "portfollio_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "portfollios", :force => true do |t|
+    t.integer  "cabinet_id"
+    t.time     "worktime_id"
+    t.integer  "salary"
+    t.integer  "bonus"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "proffesions", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

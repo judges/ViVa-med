@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ActiveRecord::Errors</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ActiveRecord::Errors</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/vendor/rails/activerecord/lib/active_record/validations_rb.html">
+                vendor/rails/activerecord/lib/active_record/validations.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                ActiveModel::Errors
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M001649">default_error_messages</a>&nbsp;&nbsp;
+      <a href="#M001650">full_messages</a>&nbsp;&nbsp;
+      <a href="#M001651">generate_message</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M001649" class="method-detail">
+        <a name="M001649"></a>
+
+        <div class="method-heading">
+          <a href="#M001649" class="method-signature">
+          <span class="method-name">default_error_messages</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001649-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001649-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/validations.rb, line 21</span>
+21:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">default_error_messages</span>
+22:         <span class="ruby-identifier">message</span> = <span class="ruby-value str">&quot;Errors.default_error_messages has been deprecated. Please use I18n.translate('activerecord.errors.messages').&quot;</span>
+23:         <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-identifier">message</span>)
+24: 
+25:         <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span> <span class="ruby-value str">'activerecord.errors.messages'</span>
+26:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M001650" class="method-detail">
+        <a name="M001650"></a>
+
+        <div class="method-heading">
+          <a href="#M001650" class="method-signature">
+          <span class="method-name">full_messages</span><span class="method-args">(options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns all the full error messages in an array.
+</p>
+<pre>
+  class Company &lt; ActiveRecord::Base
+    validates_presence_of :name, :address, :email
+    validates_length_of :name, :in =&gt; 5..30
+  end
+
+  company = Company.create(:address =&gt; '123 First St.')
+  company.errors.full_messages # =&gt;
+    [&quot;Name is too short (minimum is 5 characters)&quot;, &quot;Name can't be blank&quot;, &quot;Address can't be blank&quot;]
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001650-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001650-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/validations.rb, line 39</span>
+39:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">full_messages</span>(<span class="ruby-identifier">options</span> = {})
+40:       <span class="ruby-identifier">full_messages</span> = []
+41: 
+42:       <span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">messages</span><span class="ruby-operator">|</span>
+43:         <span class="ruby-identifier">messages</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">messages</span>)
+44:         <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">messages</span>.<span class="ruby-identifier">empty?</span>
+45: 
+46:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">attribute</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:base</span>
+47:           <span class="ruby-identifier">messages</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">full_messages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">m</span> }
+48:         <span class="ruby-keyword kw">else</span>
+49:           <span class="ruby-identifier">attr_name</span> = <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">human_attribute_name</span>(<span class="ruby-identifier">attribute</span>.<span class="ruby-identifier">to_s</span>)
+50:           <span class="ruby-identifier">prefix</span> = <span class="ruby-identifier">attr_name</span> <span class="ruby-operator">+</span> <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">t</span>(<span class="ruby-value str">'activerecord.errors.format.separator'</span>, <span class="ruby-identifier">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">' '</span>)
+51:           <span class="ruby-identifier">messages</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+52:             <span class="ruby-identifier">full_messages</span> <span class="ruby-operator">&lt;&lt;</span>  <span class="ruby-node">&quot;#{prefix}#{m}&quot;</span>
+53:           <span class="ruby-keyword kw">end</span>
+54:         <span class="ruby-keyword kw">end</span>
+55:       <span class="ruby-keyword kw">end</span>
+56: 
+57:       <span class="ruby-identifier">full_messages</span>
+58:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001651" class="method-detail">
+        <a name="M001651"></a>
+
+        <div class="method-heading">
+          <a href="#M001651" class="method-signature">
+          <span class="method-name">generate_message</span><span class="method-args">(attribute, message = :invalid, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Translates an error message in it&#8216;s default scope
+(<tt>activerecord.errrors.messages</tt>). Error messages are first looked
+up in <tt>models.MODEL.attributes.ATTRIBUTE.MESSAGE</tt>, if it&#8216;s not
+there, it&#8216;s looked up in <tt>models.MODEL.MESSAGE</tt> and if that is
+not there it returns the translation of the default message (e.g.
+<tt>activerecord.errors.messages.MESSAGE</tt>). The translated model name,
+translated attribute name and the value are available for interpolation.
+</p>
+<p>
+When using inheritance in your models, it will check all the inherited
+models too, but only if the model itself hasn&#8216;t been found. Say you
+have <tt>class Admin &lt; User; end</tt> and you wanted the translation for
+the <tt>:blank</tt> error <tt>message</tt> for the <tt>title</tt>
+<tt>attribute</tt>, it looks for these translations:
+</p>
+<p>
+&lt;ol&gt;
+&lt;li&gt;<tt>activerecord.errors.models.admin.attributes.title.blank</tt>&lt;/li&gt;
+&lt;li&gt;<tt>activerecord.errors.models.admin.blank</tt>&lt;/li&gt;
+&lt;li&gt;<tt>activerecord.errors.models.user.attributes.title.blank</tt>&lt;/li&gt;
+&lt;li&gt;<tt>activerecord.errors.models.user.blank</tt>&lt;/li&gt;
+&lt;li&gt;<tt>activerecord.errors.messages.blank</tt>&lt;/li&gt;
+&lt;li&gt;any default you provided through the <tt>options</tt> hash (in
+the activerecord.errors scope)&lt;/li&gt; &lt;/ol&gt;
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001651-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001651-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/validations.rb, line 78</span>
+ 78:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_message</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">message</span> = <span class="ruby-identifier">:invalid</span>, <span class="ruby-identifier">options</span> = {})
+ 79:       <span class="ruby-identifier">message</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:default</span>] = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:default</span>], <span class="ruby-identifier">message</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:default</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>)
+ 80: 
+ 81:       <span class="ruby-identifier">defaults</span> = <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">self_and_descendants_from_active_record</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass</span><span class="ruby-operator">|</span>
+ 82:         [ <span class="ruby-node">&quot;models.#{klass.name.underscore}.attributes.#{attribute}.#{message}&quot;</span><span class="ruby-node">&quot;models.#{klass.name.underscore}.attributes.#{attribute}.#{message}&quot;</span>, 
+ 83:           <span class="ruby-node">&quot;models.#{klass.name.underscore}.#{message}&quot;</span><span class="ruby-node">&quot;models.#{klass.name.underscore}.#{message}&quot;</span> ]
+ 84:       <span class="ruby-keyword kw">end</span>
+ 85:       
+ 86:       <span class="ruby-identifier">defaults</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:default</span>)
+ 87:       <span class="ruby-identifier">defaults</span> = <span class="ruby-identifier">defaults</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">flatten</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;messages.#{message}&quot;</span><span class="ruby-node">&quot;messages.#{message}&quot;</span>
+ 88: 
+ 89:       <span class="ruby-identifier">key</span> = <span class="ruby-identifier">defaults</span>.<span class="ruby-identifier">shift</span>
+ 90:       <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">attribute</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">attribute</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
+ 91: 
+ 92:       <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">defaults</span>,
+ 93:         <span class="ruby-identifier">:model</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">human_name</span>,
+ 94:         <span class="ruby-identifier">:attribute</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">human_attribute_name</span>(<span class="ruby-identifier">attribute</span>.<span class="ruby-identifier">to_s</span>),
+ 95:         <span class="ruby-identifier">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">value</span>,
+ 96:         <span class="ruby-identifier">:scope</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:activerecord</span>, <span class="ruby-identifier">:errors</span>]
+ 97:       }.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
+ 98: 
+ 99:       <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span>)
+100:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

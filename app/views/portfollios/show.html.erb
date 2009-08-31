@@ -1,0 +1,23 @@
+<p>
+  <b>Cabinet:</b>
+  <%=h @portfollio.cabinet_id %>
+</p>
+
+<p>
+  <b>Worktime:</b>
+  <%=h @portfollio.worktime_id %>
+</p>
+
+<p>
+  <b>Salary:</b>
+  <%=h @portfollio.salary %>
+</p>
+
+<p>
+  <b>Bonus:</b>
+  <%=h @portfollio.bonus %>
+</p>
+
+
+<%= link_to 'Edit', edit_portfollio_path(@portfollio) %> |
+<%= link_to 'Back', portfollios_path %>

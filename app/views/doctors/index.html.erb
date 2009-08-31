@@ -1,0 +1,31 @@
+<h1>Listing doctors</h1>
+
+<table border="1">
+  <tr>
+    <th><%= t :Firstname %></th>
+    <th><%= t :Lastname %></th>
+    <th><%= t :Initials %></th>
+    <th><%= t :Birthdate %></th>
+    <th><%= t :Proffesion %></th>
+    <th><%= t :Portfollio %></th>
+    <th><%= t :Actions %></th>
+  </tr>
+
+<% @doctors.each do |doctor| %>
+  <tr>
+    <td><%=h doctor.firstname %></td>
+    <td><%=h doctor.lastname %></td>
+    <td><%=h doctor.initials %></td>
+    <td><%=h doctor.birthdate %></td>
+    <td><%=h Proffesion.find(doctor.proffesion_id).name %></td>
+    <td><%=h doctor.portfollio_id %></td>
+    <td><%= link_to t(:Show), doctor %>
+    <%= link_to t(:Edit), edit_doctor_path(doctor) %>
+    <%= link_to t(:Destroy), doctor, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New doctor', new_doctor_path %>

@@ -7,7 +7,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :session
   map.root :controller => "welcome"
-
+  map.resources :doctors
+  map.resources :portfollios
+  map.resources :proffesions
+#  map.root :login
   # See how all your routes lay out with "rake routes"
 
   map.connect ':controller/:action/:id'

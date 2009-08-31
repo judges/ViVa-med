@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActionController::Rails2Compatibility</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActionController::Rails2Compatibility</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/vendor/rails/actionpack/lib/action_controller/metal/compatibility_rb.html">
+                vendor/rails/actionpack/lib/action_controller/metal/compatibility.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000547">_default_layout</a>&nbsp;&nbsp;
+      <a href="#M000546">_find_layout</a>&nbsp;&nbsp;
+      <a href="#M000544">_handle_method_missing</a>&nbsp;&nbsp;
+      <a href="#M000549">append_view_path</a>&nbsp;&nbsp;
+      <a href="#M000540">assign_shortcuts</a>&nbsp;&nbsp;
+      <a href="#M000539">initialize_template_class</a>&nbsp;&nbsp;
+      <a href="#M000545">method_for_action</a>&nbsp;&nbsp;
+      <a href="#M000548">performed?</a>&nbsp;&nbsp;
+      <a href="#M000550">prepend_view_path</a>&nbsp;&nbsp;
+      <a href="#M000542">process_action</a>&nbsp;&nbsp;
+      <a href="#M000543">render_to_body</a>&nbsp;&nbsp;
+      <a href="#M000541">template</a>&nbsp;&nbsp;
+      <a href="#M000551">view_paths</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="Rails2Compatibility/ClassMethods.html" class="link">ActionController::Rails2Compatibility::ClassMethods</a><br />
+
+    </div>
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">UnknownAction</td>
+          <td>=</td>
+          <td class="context-item-value">::AbstractController::ActionNotFound</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">DoubleRenderError</td>
+          <td>=</td>
+          <td class="context-item-value">::AbstractController::DoubleRenderError</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000547" class="method-detail">
+        <a name="M000547"></a>
+
+        <div class="method-heading">
+          <a href="#M000547" class="method-signature">
+          <span class="method-name">_default_layout</span><span class="method-args">(details, require_layout = false)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Move this into a &quot;don&#8216;t run in production&quot; module
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000547-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000547-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/compatibility.rb, line 125</span>
+125:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_default_layout</span>(<span class="ruby-identifier">details</span>, <span class="ruby-identifier">require_layout</span> = <span class="ruby-keyword kw">false</span>)
+126:       <span class="ruby-keyword kw">super</span>
+127:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">MissingTemplate</span>
+128:       <span class="ruby-identifier">_find_layout</span>(<span class="ruby-identifier">_layout</span>({}), {})
+129:       <span class="ruby-keyword kw">nil</span>
+130:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000546" class="method-detail">
+        <a name="M000546"></a>
+
+        <div class="method-heading">
+          <a href="#M000546" class="method-signature">
+          <span class="method-name">_find_layout</span><span class="method-args">(name, details)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000546-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000546-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/compatibility.rb, line 119</span>
+119:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_find_layout</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">details</span>)
+120:       <span class="ruby-identifier">details</span>[<span class="ruby-identifier">:prefix</span>] = <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/\blayouts/</span>
+121:       <span class="ruby-keyword kw">super</span>
+122:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000544" class="method-detail">
+        <a name="M000544"></a>
+
+        <div class="method-heading">
+          <a href="#M000544" class="method-signature">
+          <span class="method-name">_handle_method_missing</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000544-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000544-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/compatibility.rb, line 111</span>
+111:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_handle_method_missing</span>
+112:       <span class="ruby-identifier">method_missing</span>(<span class="ruby-ivar">@_action_name</span>.<span class="ruby-identifier">to_sym</span>)
+113:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000549" class="method-detail">
+        <a name="M000549"></a>
+
+        <div class="method-heading">
+          <a href="#M000549" class="method-signature">
+          <span class="method-name">append_view_path</span><span class="method-args">(path)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h4>Request only view path switching ====</h4>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000549-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000549-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/compatibility.rb, line 137</span>
+137:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">append_view_path</span>(<span class="ruby-identifier">path</span>)
+138:       <span class="ruby-identifier">view_paths</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">path</span>)
+139:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000540" class="method-detail">
+        <a name="M000540"></a>
+
+        <div class="method-heading">
+          <a href="#M000540" class="method-signature">
+          <span class="method-name">assign_shortcuts</span><span class="method-args">(*)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000540-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000540-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/compatibility.rb, line 74</span>
+74:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assign_shortcuts</span>(<span class="ruby-operator">*</span>) <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000539" class="method-detail">
+        <a name="M000539"></a>
+
+        <div class="method-heading">
+          <a href="#M000539" class="method-signature">
+          <span class="method-name">initialize_template_class</span><span class="method-args">(*)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+For old tests
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000539-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000539-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/compatibility.rb, line 73</span>
+73:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_template_class</span>(<span class="ruby-operator">*</span>) <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000545" class="method-detail">
+        <a name="M000545"></a>
+
+        <div class="method-heading">
+          <a href="#M000545" class="method-signature">
+          <span class="method-name">method_for_action</span><span class="method-args">(action_name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000545-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000545-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/compatibility.rb, line 115</span>
+115:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_for_action</span>(<span class="ruby-identifier">action_name</span>)
+116:       <span class="ruby-keyword kw">super</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:method_missing</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-value str">&quot;_handle_method_missing&quot;</span>)
+117:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000548" class="method-detail">
+        <a name="M000548"></a>
+
+        <div class="method-heading">
+          <a href="#M000548" class="method-signature">
+          <span class="method-name">performed?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000548-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000548-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/compatibility.rb, line 132</span>
+132:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">performed?</span>
+133:       <span class="ruby-identifier">response_body</span>
+134:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000550" class="method-detail">
+        <a name="M000550"></a>
+
+        <div class="method-heading">
+          <a href="#M000550" class="method-signature">
+          <span class="method-name">prepend_view_path</span><span class="method-args">(path)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000550-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000550-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/compatibility.rb, line 141</span>
+141:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepend_view_path</span>(<span class="ruby-identifier">path</span>)
+142:       <span class="ruby-identifier">view_paths</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">path</span>)
+143:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000542" class="method-detail">
+        <a name="M000542"></a>
+
+        <div class="method-heading">
+          <a href="#M000542" class="method-signature">
+          <span class="method-name">process_action</span><span class="method-args">(*)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000542-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000542-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/compatibility.rb, line 81</span>
+81:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_action</span>(<span class="ruby-operator">*</span>)
+82:       <span class="ruby-identifier">template</span>
+83:       <span class="ruby-keyword kw">super</span>
+84:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000543" class="method-detail">
+        <a name="M000543"></a>
+
+        <div class="method-heading">
+          <a href="#M000543" class="method-signature">
+          <span class="method-name">render_to_body</span><span class="method-args">(options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000543-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000543-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/compatibility.rb, line 100</span>
+100:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_to_body</span>(<span class="ruby-identifier">options</span>)
+101:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">:template</span>)
+102:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:template</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/^\//</span>, <span class="ruby-value str">''</span>)
+103:       <span class="ruby-keyword kw">end</span>
+104: 
+105:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:text</span>] = <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:nothing</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span>
+106:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:text</span>] = <span class="ruby-value str">&quot; &quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">:text</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:text</span>].<span class="ruby-identifier">nil?</span>
+107: 
+108:       <span class="ruby-keyword kw">super</span> <span class="ruby-operator">||</span> <span class="ruby-value str">&quot; &quot;</span>
+109:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000541" class="method-detail">
+        <a name="M000541"></a>
+
+        <div class="method-heading">
+          <a href="#M000541" class="method-signature">
+          <span class="method-name">template</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+TODO: Remove this after we flip
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000541-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000541-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/compatibility.rb, line 77</span>
+77:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">template</span>
+78:       <span class="ruby-ivar">@template</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">view_context</span>
+79:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000551" class="method-detail">
+        <a name="M000551"></a>
+
+        <div class="method-heading">
+          <a href="#M000551" class="method-signature">
+          <span class="method-name">view_paths</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000551-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000551-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/metal/compatibility.rb, line 145</span>
+145:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">view_paths</span>
+146:       <span class="ruby-identifier">view_context</span>.<span class="ruby-identifier">view_paths</span>
+147:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

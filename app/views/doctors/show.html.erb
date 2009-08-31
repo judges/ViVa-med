@@ -1,0 +1,31 @@
+<p>
+  <b>Firstname:</b>
+  <%=h @doctor.firstname %>
+</p>
+
+<p>
+  <b>Lastname:</b>
+  <%=h @doctor.lastname %>
+</p>
+
+<p>
+  <b>Initials:</b>
+  <%=h @doctor.initials %>
+</p>
+
+<p>
+  <b>Proffesion:</b>
+  <!--
+    <%=h @doctor.proffesion_id %>
+  -->
+  <%=h @proffesion.name %>
+</p>
+
+<p>
+  <b>Portfollio:</b>
+  <%=h @doctor.portfollio_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_doctor_path(@doctor) %> |
+<%= link_to 'Back', doctors_path %>

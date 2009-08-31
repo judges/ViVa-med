@@ -1,0 +1,26 @@
+<h1>Listing portfollios</h1>
+
+<table>
+  <tr>
+    <th>Cabinet</th>
+    <th>Worktime</th>
+    <th>Salary</th>
+    <th>Bonus</th>
+  </tr>
+
+<% @portfollios.each do |portfollio| %>
+  <tr>
+    <td><%=h portfollio.cabinet_id %></td>
+    <td><%=h portfollio.worktime_id %></td>
+    <td><%=h portfollio.salary %></td>
+    <td><%=h portfollio.bonus %></td>
+    <td><%= link_to 'Show', portfollio %></td>
+    <td><%= link_to 'Edit', edit_portfollio_path(portfollio) %></td>
+    <td><%= link_to 'Destroy', portfollio, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New portfollio', new_portfollio_path %>
